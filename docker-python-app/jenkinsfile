@@ -1,0 +1,43 @@
+pipeline {
+    agent {
+        docker {
+            image 'python:3.9'
+        }
+    }
+
+    environment {
+        APP_NAME = "docker-python-app"
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                git 'https://github.com/ton-repo/docker-python-app.git'
+            }
+        }
+
+        stage('Install dependencies') {
+            steps {
+                sh 'pip install -r requirements.txt'
+            }
+        }
+
+        stage('Run tests') {
+            steps {
+                sh 'pytest test_app.py'
+            }
+        }
+
+        stage('Build Docker Image') {
+            steps {
+                sh 'docker build -t $APP_NAME .'
+            }
+        }
+
+        stage('Run Docker Container') {
+            steps {
+                sh 'docker run -d -p 5000:5000 $APP_NAME'
+            }
+        }
+    }
+}
