@@ -1,9 +1,5 @@
 pipeline {
-    agent {
-        docker {
-            image 'python:3.9'
-        }
-    }
+    agent none  // Cela permet de spécifier des agents pour chaque stage
 
     environment {
         APP_NAME = "docker-python-app"
@@ -11,18 +7,27 @@ pipeline {
 
     stages {
         stage('Checkout') {
+            agent {
+                docker { image 'python:3.9' }
+            }
             steps {
                 git 'https://github.com/ton-repo/docker-python-app.git'
             }
         }
 
         stage('Install dependencies') {
+            agent {
+                docker { image 'python:3.9' }
+            }
             steps {
                 sh 'pip install -r requirements.txt'
             }
         }
 
         stage('Run tests') {
+            agent {
+                docker { image 'python:3.9' }
+            }
             steps {
                 sh 'pytest test_app.py'
             }
