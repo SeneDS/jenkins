@@ -1,14 +1,18 @@
 pipeline {
-    agent any
+    agent {
+        docker {
+            image 'python'
+        }
+    }
     stages {
-        stage('Run in Docker') {
+        stage('Build') {
             steps {
-                script {
-                    docker.image('python').inside {
-                        sh 'python --version'
-                    }
-                }
+                sh '''
+                     docker version 
+                     docker pull python
+                '''
             }
         }
     }
 }
+
