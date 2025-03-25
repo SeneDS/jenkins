@@ -9,7 +9,7 @@ pipeline {
             steps {
                 sh '''
                      docker version 
-                     docker pull python:3.9
+                     docker pull python
                 '''
             }
         }
