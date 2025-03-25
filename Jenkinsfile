@@ -1,15 +1,15 @@
 pipeline {
     agent {
         docker {
-            image 'python'
+            image 'python3'
         }
     }
     stages {
         stage('Build') {
             steps {
                 sh '''
-                     python --version
-                     docker pull python
+                      python3 --version
+                     docker pull  python3
                 '''
             }
         }
