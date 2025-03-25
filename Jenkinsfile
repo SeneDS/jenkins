@@ -8,8 +8,10 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'docker version'
-                sh 'docker pull python:3.9'
+                sh '''
+                     docker version 
+                     docker pull python:3.9
+                '''
             }
         }
     }
