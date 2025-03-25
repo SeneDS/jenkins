@@ -8,7 +8,7 @@ pipeline {
         stage('Build') {
             steps {
                 sh '''
-                     docker version 
+                     python --version
                      docker pull python
                 '''
             }
