@@ -1,19 +1,16 @@
 pipeline {
     agent {
         docker {
-            image 'python'
+            image 'python:3.10' // tu peux spécifier une version stable ici
         }
     }
     stages {
         stage('Build') {
             steps {
                 sh '''
-                python3 --version
-                docker pull  python
+                    python --version
                 '''
             }
         }
     }
 }
-}}}}
-
